@@ -25,3 +25,31 @@ SELECT * FROM animals WHERE name != 'Gabumon';
 
 -- Find all animals with a weight between 10.4kg and 17.3kg (including the animals with the weights that equals precisely 10.4kg or 17.3kg).
 SELECT * FROM animals WHERE weight_kg >= 10.4 AND weight_kg <= 17.3;
+
+BEGIN;
+UPDATE animals SET species = 'unspecified';
+ROLLBACK;
+
+BEGIN;
+UPDATE animals SET species = 'Digmon' WHERE name LIKE '%mon';
+UPDATE animals SET species = 'Pokemon' WHERE species IS NULL;
+COMMIT;
+
+BEGIN;
+DELETE FROM animals;
+ROLLBACK;
+
+BEGIN;
+DELETE FROM animals WHERE date_of_birth > '2022-01-01';
+SAVEPOINT sp1;
+UPDATE animals SET weight_kg = weight_kg * -1;
+ROLLBACK TO sp1;
+UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
+COMMIT;
+
+SELECT COUNT(*) FROM animals;
+SELECT COUNT(*) FROM animals WHERE escape_attempts = 0;
+SELECT AVG(weight_kg) FROM animals;
+SELECT MAX(escape_attempts) FROM animals;
+SELECT MIN(weight_kg), MAX(weight_kg) FROM animals;
+SELECT AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31';
