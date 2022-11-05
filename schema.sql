@@ -23,3 +23,10 @@ CREATE TABLE species (
 
 ALTER TABLE animals ADD species_id BIGINT species(id);
 ALTER TABLE animals ADD owner_id BIGINT owners(id);
+
+CREATE TABLE (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    age integer,
+    date_of_graduation date,
+);
