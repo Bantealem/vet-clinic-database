@@ -9,3 +9,17 @@ CREATE TABLE animals (
     weight_kg DECIMAL NOT NULL,
     species VARCHAR(100) 
 );
+
+CREATE TABLE owners (
+    id BIGSERIAL PRIMARY KEY,
+    full_name VARCHAR(255),
+    age integer
+);
+
+CREATE TABLE species (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+ALTER TABLE animals ADD species_id BIGINT species(id);
+ALTER TABLE animals ADD owner_id BIGINT owners(id);
